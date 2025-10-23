@@ -56,9 +56,9 @@ def get_db_connection():
     logging.error('Не удалось подкючится к серверу после 5 попыток =Х')
     return None    
             
-        
-# Читаем файл из 
 
+
+# Читаем и предобрабатываем файл с заметками 
 def read_file(path_to_file: str) -> str:    
     try:
         with open(path_to_file, 'r') as file:                        # 'r' - файл открывается в режиме чтения (read)
@@ -73,7 +73,7 @@ def read_file(path_to_file: str) -> str:
 
 
 
-
+# Разделяем заметки по категириям и отправляем на сервер MySQL
 def process_and_adding_date(current_date, comment, cursore, db_connector) -> None:
     subjects = ['sql', 'py', 'bash', 'eng', 'otr', 'db']
 
@@ -114,7 +114,7 @@ def add_daily_knowlege() -> str:
         logging.error(f'Ошибка: {ve}')
     
     finally:
-        cursore.close() # Закрываем запросник 
+        cursore.close()      # Закрываем запросник 
         db_connector.close() # Закрываем сессию
         logging.info('Соединение с сервером закрыто')
 
